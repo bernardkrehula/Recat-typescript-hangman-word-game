@@ -1,0 +1,16 @@
+.words{
+    display: grid;
+    height: 200px;
+    width: 500px;
+    grid-template-columns: repeat(10, 1fr);
+    justify-items: center;
+}
+.word {
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+.word p {
+    width: fit-content;
+    margin: 0;
+}

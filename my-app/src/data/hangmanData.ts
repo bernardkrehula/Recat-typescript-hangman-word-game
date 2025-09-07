@@ -1,10 +1,13 @@
 
 const hangmanData = {
     mode: ['hard', 'easy'],
-    category: [ 'movie', 'tvshow', 'country', 'animal'],
+    category: {
+        movie: ['titanic', 'interstellar', 'spiderman', 'conjuring', 'batman'],
+        tvshow: ['supertalent', 'voice', 'friends', 'dexter'],
+        country: ['spain', 'france', 'sweden', 'norway', 'egypt'],
+        animal: ['lion', 'dog', 'cow', 'bird', 'shark']
+    },
 
-    alphabet: ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i',
-         'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 
-         't', 'u', 'v', 'w', 'x', 'y', 'z']
+    alphabet: ['abcdefghijklmnopqrstuvwxyz']  
 }
 export default hangmanData;
