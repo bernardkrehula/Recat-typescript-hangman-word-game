@@ -2,6 +2,7 @@ import { useState } from 'react'
 import './App.css'
 import hangmanData from '../data/hangmanData';
 import Alphabet from '../components/alphabet/Aphabet';
+import StartMenu from '../components/startMenu/StartMenu';
 
 //Prebaciti hangman data u neki objekt a guessedWord u state
 
@@ -20,7 +21,8 @@ function App() {
   return (
     <>
       <div className='main'>
-        <Alphabet alphabet={hangman.alphabet}/>
+        <StartMenu />
+        {/* <Alphabet alphabet={hangman.alphabet}/> */}
       </div>
     </>
   )
