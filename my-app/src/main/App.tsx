@@ -1,26 +1,21 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import hangmanData from '../data/hangmanData';
 import Alphabet from '../components/alphabet/Aphabet';
+
 //Prebaciti hangman data u neki objekt a guessedWord u state
+
 type HangmanType = {
-  mode: 'normal' | 'hard',
+  mode: 'hard' | 'easy',
   category: string[],
-  alphabet: string[],
-  guessedWords: string[] 
+  alphabet: string
 }
 
 function App() {
-  const [ hangman, setHangman ] = useState<HangmanType>({
-    mode: 'hard',
-    category: [],
-    alphabet: [],
-    guessedWords: []
-  });
+  const [ guessedWord, setGuessedWord ] = useState('');
+  const hangman: HangmanType = hangmanData;
 
-  useEffect(() => {
-    setHangman(hangmanData);
-  },[])
+
 
   return (
     <>
