@@ -21,7 +21,7 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu />
+        <StartMenu hangman={hangman}/>
         {/* <Alphabet alphabet={hangman.alphabet}/> */}
       </div>
     </>
