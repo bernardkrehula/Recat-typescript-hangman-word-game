@@ -7,14 +7,29 @@ import StartMenu from '../components/startMenu/StartMenu';
 //Prebaciti hangman data u neki objekt a guessedWord u state
 
 type HangmanType = {
-  mode: 'hard' | 'easy',
-  category: string[],
-  alphabet: string
+  easy: {
+    category: {
+      movie: string[],
+      tvshow: string[],
+      country: string[],
+      animal: string[]
+    },
+    alphabet: string
+  },
+  hard: {
+    category: {
+      movie: string[],
+      tvshow: string[],
+      country: string[],
+      animal: string[]
+    },
+    alphabet: string
+  }
 }
 
 function App() {
   const [ guessedWord, setGuessedWord ] = useState('');
-  const hangman: HangmanType = hangmanData;
+  const hangman: HangmanType = hangmanData.mode;
 
 
 
