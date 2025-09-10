@@ -8,12 +8,16 @@ type AlphabetProps = {
 const Alphabet = ({alphabet}: AlphabetProps) => {
 
     return(
-        <div className='words'>
-          <div className='header'>
+      <>
+        <div className='header'>
             <h2>Hangman. Do (or) Die</h2>
             <h3>Guessed wrong: 0</h3>
             <Btn varitaion='change-category'>Change Category</Btn>
           </div>
+        <img src='./0wrongGuess.jpeg' className='hangman'/>
+        <h4>Guess the TVSHOW:</h4>
+        <div className='words'>
+          
           
           {/* alphabet.map((word: string, index: number) => {
             return(
@@ -23,6 +27,7 @@ const Alphabet = ({alphabet}: AlphabetProps) => {
             )
           }) */}
         </div>
+      </>
     )
 }
 export default Alphabet;

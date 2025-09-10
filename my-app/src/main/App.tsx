@@ -1,37 +1,39 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './App.css'
 import hangmanData from '../data/hangmanData';
 import Alphabet from '../components/alphabet/Aphabet';
 import StartMenu from '../components/startMenu/StartMenu';
-
-//Prebaciti hangman data u neki objekt a guessedWord u state
-
-type HangmanType = {
-  easy: {
-    category: {
-      movie: string[],
-      tvshow: string[],
-      country: string[],
-      animal: string[]
-    },
-    alphabet: string
-  },
-  hard: {
-    category: {
-      movie: string[],
-      tvshow: string[],
-      country: string[],
-      animal: string[]
-    },
-    alphabet: string
-  }
-}
+import type { HangmanType } from './HangmanType';
 
 function App() {
   const [ guessedWord, setGuessedWord ] = useState('');
-  const hangman: HangmanType = hangmanData.mode;
-
-
+  const [ hangmanValues, setHangmanValues ] = useState({
+      mode: {
+          easy: {
+              category: {
+                  movie: [],
+                  tvshow: [],
+                  country: [],
+                  animal: []
+              },
+              alphabet: ''
+          },
+          hard: {
+                  category: {
+                      movie: [],
+                      tvshow: [],
+                      country: [],
+                      animal: []
+                  },
+                  alphabet: ''
+          }
+      }
+    }
+  )
+  useEffect(() => {
+    setHangmanValues(hangmanData);
+  },[])
+  const hangman: HangmanType = hangmanValues;
 
   return (
     <>
@@ -43,4 +45,4 @@ function App() {
   )
 }
 
-export default App
+export default App;

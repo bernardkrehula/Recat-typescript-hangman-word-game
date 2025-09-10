@@ -1,14 +1,25 @@
 import './StartMenu.css'
 import Btn from '../Btn/Btn';
+import type { HangmanType } from '../../main/HangmanType';
 
-const StartMenu = ({hangman}) => {
-    console.log(hangman.mode)
+type HangmanMode = {
+    hangman: HangmanType;
+}
+
+const StartMenu = ({hangman}: HangmanMode) => {
+    
+    
+    const displayData = () => {
+        console.log(hangman)
+        console.log(Object.keys(hangman.mode))
+    }
     return(
         <div className='overlay'>
             <div className="start-menu">
                 <h2>Chose mode:</h2>
                 <div className='easy-hard-btns'>
-                    <Btn>Easy</Btn>
+                    {/* {Object.keys(hangman.mode).map()} */}
+                    <Btn onClick={displayData}>Easy</Btn>
                     <Btn>Hard</Btn>
                 </div>
                 <h2>Chose Category to start the game:</h2>

@@ -1,8 +1,9 @@
 .overlay{
+    display: block;
     position: absolute;
     inset: 0;
-    backdrop-filter: blur(10px); /* ovo muti */
-    background-color: rgba(0, 0, 0, 0.3); /* opcionalno zatamnjenje */
+    backdrop-filter: blur(10px);
+    background-color: rgba(0, 0, 0, 0.3);
     z-index: 1;
 }
 .start-menu{
