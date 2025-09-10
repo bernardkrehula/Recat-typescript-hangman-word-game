@@ -1,21 +1,23 @@
 import './StartMenu.css'
 import Btn from '../Btn/Btn';
 import type { HangmanType } from '../../main/HangmanType';
+import { useState } from 'react';
 
 type HangmanMode = {
     hangman: HangmanType;
 }
 
 const StartMenu = ({hangman}: HangmanMode) => {
-    
+    const [ selectedMode, setMode ] = useState('easy');
     
     const displayModes = () => {
-       return Object.keys(hangman.mode).map(mode => (<Btn key={mode}>{mode}</Btn>));
+       return Object.keys(hangman.mode).map(mode => (<Btn key={mode} onClick={() => {setMode(mode)}}>{mode}</Btn>));
+    }
+
+    const displayCategories = () => {
+        return Object.keys(hangman.mode[selectedMode].category).map(key => (<Btn key={key}>{key}</Btn>));
     }
     
-    const displayCategories = () => {
-
-    }
     return(
         <div className='overlay'>
             <div className="start-menu">
@@ -25,10 +27,7 @@ const StartMenu = ({hangman}: HangmanMode) => {
                 </div>
                 <h2>Chose Category to start the game:</h2>
                 <div className='categories'>
-                    <Btn>Movie</Btn>
-                    <Btn>TvShow</Btn>
-                    <Btn>Country</Btn>
-                    <Btn>Animal</Btn>
+                    {displayCategories()}
                 </div>
             </div>
         </div> 
