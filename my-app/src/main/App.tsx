@@ -37,7 +37,7 @@ function App() {
     <>
       <div className='main'>
         <StartMenu hangman={hangman}/>
-        {/* <Alphabet alphabet={hangman.alphabet}/> */}
+        <Alphabet />
       </div>
     </>
   )

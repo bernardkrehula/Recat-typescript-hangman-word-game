@@ -10,7 +10,7 @@ html{
 .main{
   display: flex;
   height: 100vh;
-  background-color: black;
+  background-color: #161017;
   text-align: center;
   justify-content: center;
 }

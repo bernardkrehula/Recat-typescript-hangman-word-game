@@ -1,6 +1,15 @@
+.overlay{
+    position: absolute;
+    inset: 0;
+    backdrop-filter: blur(10px); /* ovo muti */
+    background-color: rgba(0, 0, 0, 0.3); /* opcionalno zatamnjenje */
+    z-index: 1;
+}
 .start-menu{
+    position: relative;
     width: fit-content;
-    margin-top: 330px;
+    margin: 330px auto;
+    z-index: 3;
 }
 .start-menu h2{
     font-size: 2.5rem;

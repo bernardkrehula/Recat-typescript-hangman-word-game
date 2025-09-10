@@ -7,4 +7,9 @@
     font-weight: 700;
     border-radius: 15px;
     cursor: pointer;
+    white-space: nowrap;
+}
+.change-category{
+    padding: 15px 15px;
+    text-transform: capitalize;
 }
