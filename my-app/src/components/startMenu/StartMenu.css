@@ -1,0 +1,24 @@
+.start-menu{
+    width: fit-content;
+    margin-top: 330px;
+}
+.start-menu h2{
+    font-size: 2.5rem;
+    color: white;
+}
+.easy-hard-btns{
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    margin: 25px 0;
+}
+.easy-hard-btns > * {
+    flex: 1;
+}
+.categories{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 25px;
+}
