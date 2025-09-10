@@ -1,11 +1,14 @@
 import './Alphabet.css'
 import Btn from '../Btn/Btn'
+import type { HangmanType } from '../../main/HangmanType'
 
-type AlphabetProps = {
-    alphabet: string[];
-}
+const Alphabet = ({hangman}: HangmanType) => {
 
-const Alphabet = ({alphabet}: AlphabetProps) => {
+    const displayAlphabet = () => { 
+      return hangman.mode['easy'].alphabet
+      .split('')
+      .map((letter, index) => (<Btn key={index} varitaion='letter'>{letter}</Btn>))
+    };
 
     return(
       <>
@@ -17,7 +20,7 @@ const Alphabet = ({alphabet}: AlphabetProps) => {
         <img src='./0wrongGuess.jpeg' className='hangman'/>
         <h4>Guess the TVSHOW:</h4>
         <div className='words'>
-          
+        {displayAlphabet()}
           
           {/* alphabet.map((word: string, index: number) => {
             return(
