@@ -7,8 +7,14 @@ type HangmanMode = {
     hangman: HangmanType;
 }
 
-const StartMenu = ({hangman}: HangmanMode) => {
-    const [ selectedMode, setMode ] = useState('easy');
+type MenuProps = {
+    hangman: HangmanMode;
+    selectedMode: string;
+    setMode: string;
+}
+
+const StartMenu = ({hangman, selectedMode, setMode}: MenuProps) => {
+    
     
     const displayModes = () => {
        return Object.keys(hangman.mode).map(mode => (<Btn key={mode} onClick={() => {setMode(mode)}}>{mode}</Btn>));
@@ -17,6 +23,7 @@ const StartMenu = ({hangman}: HangmanMode) => {
     const displayCategories = () => {
         return Object.keys(hangman.mode[selectedMode].category).map(key => (<Btn key={key}>{key}</Btn>));
     }
+    
     
     return(
         <div className='overlay'>

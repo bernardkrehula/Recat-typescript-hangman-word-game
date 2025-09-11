@@ -6,7 +6,6 @@ import StartMenu from '../components/startMenu/StartMenu';
 import type { HangmanType } from './HangmanType';
 
 function App() {
-  const [ guessedWord, setGuessedWord ] = useState('');
   const [ hangmanValues, setHangmanValues ] = useState({
       mode: {
           easy: {
@@ -30,6 +29,8 @@ function App() {
       }
     }
   )
+  const [ selectedMode, setMode ] = useState('easy');
+
   useEffect(() => {
     setHangmanValues(hangmanData);
   },[])
@@ -38,7 +39,7 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu hangman={hangman}/>
+        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode}/>
         <Alphabet hangman={hangman}/>
       </div>
     </>

@@ -1,14 +1,21 @@
 import './Alphabet.css'
 import Btn from '../Btn/Btn'
 import type { HangmanType } from '../../main/HangmanType'
+import { useState } from 'react'
 
 const Alphabet = ({hangman}: HangmanType) => {
+  const [ guessedWord, setGuessedWord ] = useState('');
 
     const displayAlphabet = () => { 
       return hangman.mode['easy'].alphabet
       .split('')
-      .map((letter, index) => (<Btn key={index} varitaion='letter'>{letter}</Btn>))
+      .map((letter, index) => (<Btn key={index} onClick={() => returnLetter(letter)} varitaion='letter'>{letter}</Btn>))
     };
+    const returnLetter = (letter) => {
+      setGuessedWord(prev => prev + letter)
+      
+      console.log(guessedWord)
+    }
 
     return(
       <>
