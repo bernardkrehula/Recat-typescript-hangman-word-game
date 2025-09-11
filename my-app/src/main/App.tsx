@@ -30,6 +30,7 @@ function App() {
     }
   )
   const [ selectedMode, setMode ] = useState('easy');
+  const [ selectedCategory, setCategory ] = useState('');
 
   useEffect(() => {
     setHangmanValues(hangmanData);
@@ -39,8 +40,8 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode}/>
-        <Alphabet hangman={hangman}/>
+        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} setCategory={setCategory}/>
+        <Alphabet hangman={hangman} selectedMode={selectedMode} selectedCategory={selectedCategory}/>
       </div>
     </>
   )

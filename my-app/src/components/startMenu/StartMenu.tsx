@@ -7,13 +7,14 @@ type HangmanMode = {
     hangman: HangmanType;
 }
 
-type MenuProps = {
+export type MenuProps = {
     hangman: HangmanMode;
     selectedMode: string;
     setMode: string;
+    setCategory: string;
 }
 
-const StartMenu = ({hangman, selectedMode, setMode}: MenuProps) => {
+const StartMenu = ({hangman, selectedMode, setMode, setCategory}: MenuProps) => {
     
     
     const displayModes = () => {
@@ -21,7 +22,7 @@ const StartMenu = ({hangman, selectedMode, setMode}: MenuProps) => {
     }
 
     const displayCategories = () => {
-        return Object.keys(hangman.mode[selectedMode].category).map(key => (<Btn key={key}>{key}</Btn>));
+        return Object.keys(hangman.mode[selectedMode].category).map(key => (<Btn key={key} onClick={() => setCategory(key)}>{key}</Btn>));
     }
     
     

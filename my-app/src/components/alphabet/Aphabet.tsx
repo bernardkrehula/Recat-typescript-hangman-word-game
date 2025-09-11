@@ -1,9 +1,9 @@
 import './Alphabet.css'
 import Btn from '../Btn/Btn'
-import type { HangmanType } from '../../main/HangmanType'
 import { useState } from 'react'
+import type { MenuProps } from '../startMenu/StartMenu'
 
-const Alphabet = ({hangman}: HangmanType) => {
+const Alphabet = ({hangman, selectedMode, selectedCategory}: MenuProps) => {
   const [ guessedWord, setGuessedWord ] = useState('');
 
     const displayAlphabet = () => { 
