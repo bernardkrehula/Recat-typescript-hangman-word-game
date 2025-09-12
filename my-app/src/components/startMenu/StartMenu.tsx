@@ -1,7 +1,6 @@
 import './StartMenu.css'
 import Btn from '../Btn/Btn';
 import type { HangmanType } from '../../main/HangmanType';
-import { useState } from 'react';
 
 type HangmanMode = {
     hangman: HangmanType;
@@ -12,6 +11,8 @@ export type MenuProps = {
     selectedMode: string;
     setMode: string;
     setCategory: string;
+    handleCategoryClick: (value: string) => void;
+    isCategoryClicked: string;
 }
 
 const StartMenu = ({hangman, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
@@ -25,13 +26,13 @@ const StartMenu = ({hangman, selectedMode, setMode, handleModeClick, handleCateg
     }
 
     const displayCategories = () => {
-        return Object.keys(hangman.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => handleCategoryClick(category)}>{category}</Btn>));
+        return Object.keys(hangman.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>));
     }
     
     
     
     return(
-        <div className='overlay'>
+        !isCategoryClicked ? (<div className='overlay'>
             <div className="start-menu">
                 <h2>Chose mode:</h2>
                 <div className='easy-hard-btns'>
@@ -42,7 +43,7 @@ const StartMenu = ({hangman, selectedMode, setMode, handleModeClick, handleCateg
                     {displayCategories()}
                 </div>
             </div>
-        </div> 
+        </div>) : ''
     )
 }
 export default StartMenu;

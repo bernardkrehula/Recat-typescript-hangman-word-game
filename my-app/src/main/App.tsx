@@ -32,7 +32,7 @@ function App() {
     }
   )
   const [ selectedMode, setMode ] = useState('easy');
-  const [ randomWord, setRandomWord ] = useState('');
+  const [ guessedWord, setGuessedWord ] = useState('');
   const [ isCategoryClicked, setClickedCategory ] = useState(false);
 
   const hangman: HangmanType = hangmanValues;
@@ -57,14 +57,14 @@ function App() {
 
   const getRandomWord = (chosenCategory) => {
     const randomIndex = Math.floor(Math.random() * hangmanValues.modes[selectedMode].categories[chosenCategory].length);
-    const getRandomWord = hangmanValues.modes[selectedMode].categories[chosenCategory][randomIndex];
-    setRandomWord(getRandomWord);  
+    const randomWord = hangmanValues.modes[selectedMode].categories[chosenCategory][randomIndex];
+    setGuessedWord(randomWord);  
   }
   return (
     <>
       <div className='main'>
         <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
-        <Alphabet hangman={hangman} selectedMode={selectedMode} randomWord={randomWord}/>
+        <Alphabet hangman={hangman} selectedMode={selectedMode} guessedWord={guessedWord}/>
       </div>
     </>
   )

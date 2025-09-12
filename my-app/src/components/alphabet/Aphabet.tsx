@@ -3,8 +3,8 @@ import Btn from '../Btn/Btn'
 import { useState } from 'react'
 import type { MenuProps } from '../startMenu/StartMenu'
 
-const Alphabet = ({hangman, selectedMode, selectedCategory}: MenuProps) => {
-  const [ guessedWord, setGuessedWord ] = useState('');
+const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
+    const [ wrongLetters, setWrongLetter ] = useState('');
 
     const displayAlphabet = () => { 
       return hangman.modes['easy'].alphabet
@@ -12,9 +12,8 @@ const Alphabet = ({hangman, selectedMode, selectedCategory}: MenuProps) => {
       .map((letter, index) => (<Btn key={index} onClick={() => returnLetter(letter)} varitaion='letter'>{letter}</Btn>))
     };
     const returnLetter = (letter) => {
-      setGuessedWord(prev => prev + letter)
-      
-      console.log(selectedMode)
+      const clickedLetter = guessedWord.includes(letter);
+      if(!clickedLetter) setWrongLetter(prev => prev + letter);
     }
 
     return(
