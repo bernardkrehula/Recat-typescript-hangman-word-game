@@ -4,7 +4,7 @@ import { useState } from 'react'
 import type { MenuProps } from '../startMenu/StartMenu'
 
 const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
-    const [ wrongLetters, setWrongLetter ] = useState('');
+    const [ wrongLetters, setWrongLetter ] = useState([]);
 
     const displayAlphabet = () => { 
       return hangman.modes['easy'].alphabet
@@ -13,14 +13,14 @@ const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
     };
     const returnLetter = (letter) => {
       const clickedLetter = guessedWord.includes(letter);
-      if(!clickedLetter) setWrongLetter(prev => prev + letter);
+      if(!clickedLetter) setWrongLetter(prev => [...prev, letter]);
     }
 
     return(
       <>
         <div className='header'>
             <h2>Hangman. Do (or) Die</h2>
-            <h3>Guessed wrong: 0</h3>
+            <h3>Guessed wrong: {wrongLetters.length}</h3>
             <Btn varitaion='change-category'>Change Category</Btn>
           </div>
         <img src='./0wrongGuess.jpeg' className='hangman'/>
