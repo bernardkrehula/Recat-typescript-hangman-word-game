@@ -39,14 +39,13 @@ function App() {
   },[])
 
   const handleClick = (mode) => {
-    setHangmanValues(prev => ({
-      ...prev,
-      modes: {
-        ...prev.modes, [mode]: {
-          ...prev.modes[mode], isClicked: !prev.modes[mode].isClicked,
-        },
-      },
-    }))
+    if(hangmanValues.modes[mode].isClicked != true){
+        setHangmanValues(prev => ({
+        ...prev,
+        modes: Object.fromEntries(Object.entries(prev.modes).map(([key, mode]) => [key, {...mode, isClicked: !mode.isClicked}]))
+      }))
+    }
+    
     console.log(hangmanValues)
   }
   const hangman: HangmanType = hangmanValues;

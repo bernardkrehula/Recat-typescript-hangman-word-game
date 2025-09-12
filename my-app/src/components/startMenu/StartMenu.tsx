@@ -17,7 +17,7 @@ export type MenuProps = {
 const StartMenu = ({hangman, selectedMode, setMode, setCategory, handleClick}: MenuProps) => {
     
     const displayModes = () => {
-       return Object.keys(hangman.modes).map(mode => (<Btn key={mode} onClick={() => {handleClick(mode)}}>{mode}</Btn>));
+       return Object.keys(hangman.modes).map(mode => (<Btn key={mode} varitaion={hangman.modes[mode].isClicked ? 'clicked' : ''} onClick={() => handleClick(mode)}>{mode}</Btn>));
     }
 
     const displayCategories = () => {
