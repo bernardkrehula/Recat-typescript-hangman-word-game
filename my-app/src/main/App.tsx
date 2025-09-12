@@ -7,8 +7,9 @@ import type { HangmanType } from './HangmanType';
 
 function App() {
   const [ hangmanValues, setHangmanValues ] = useState({
-      mode: {
+      modes: {
           easy: {
+              isClicked: true,
               category: {
                   movie: [],
                   tvshow: [],
@@ -18,6 +19,7 @@ function App() {
               alphabet: ''
           },
           hard: {
+                  isClicked: false,
                   category: {
                       movie: [],
                       tvshow: [],
@@ -35,12 +37,24 @@ function App() {
   useEffect(() => {
     setHangmanValues(hangmanData);
   },[])
+
+  const handleClick = (mode) => {
+    setHangmanValues(prev => ({
+      ...prev,
+      modes: {
+        ...prev.modes, [mode]: {
+          ...prev.modes[mode], isClicked: !prev.modes[mode].isClicked,
+        },
+      },
+    }))
+    console.log(hangmanValues)
+  }
   const hangman: HangmanType = hangmanValues;
 
   return (
     <>
       <div className='main'>
-        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} setCategory={setCategory}/>
+        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} setCategory={setCategory} handleClick={handleClick}/>
         <Alphabet hangman={hangman} selectedMode={selectedMode} selectedCategory={selectedCategory}/>
       </div>
     </>

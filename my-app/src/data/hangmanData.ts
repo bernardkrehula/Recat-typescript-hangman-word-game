@@ -1,7 +1,8 @@
 
 const hangmanData = {
-    mode: {
+    modes: {
         easy: {
+            isClicked: true,
             category: {
                 movie: ['joker', 'titanic', 'spiderman', 'avatar', 'batman'],
                 tvshow: ['supertalent', 'voice', 'friends', 'dexter'],
@@ -11,6 +12,7 @@ const hangmanData = {
             alphabet: 'abcdefghijklmnopqrstuvwxyz'
         },
         hard: {
+                isClicked: false,
                 category: {
                     movie: ['descent', 'interstellar', 'babadook', 'conjuring', 'saw'],
                     tvshow: ['fbi', 'bones', 'ncis', 'mentalist'],

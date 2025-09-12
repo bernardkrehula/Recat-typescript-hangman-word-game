@@ -7,14 +7,14 @@ const Alphabet = ({hangman, selectedMode, selectedCategory}: MenuProps) => {
   const [ guessedWord, setGuessedWord ] = useState('');
 
     const displayAlphabet = () => { 
-      return hangman.mode['easy'].alphabet
+      return hangman.modes['easy'].alphabet
       .split('')
       .map((letter, index) => (<Btn key={index} onClick={() => returnLetter(letter)} varitaion='letter'>{letter}</Btn>))
     };
     const returnLetter = (letter) => {
       setGuessedWord(prev => prev + letter)
       
-      console.log(guessedWord)
+      console.log(selectedMode)
     }
 
     return(

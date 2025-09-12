@@ -18,3 +18,6 @@
     background-color: #07ffc9;
     font-size: 2.8rem;
 }
+.clicked{
+    background-color: red;
+}
