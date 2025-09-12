@@ -10,7 +10,7 @@ function App() {
       modes: {
           easy: {
               isClicked: true,
-              category: {
+              categories: {
                   movie: [],
                   tvshow: [],
                   country: [],
@@ -20,7 +20,7 @@ function App() {
           },
           hard: {
                   isClicked: false,
-                  category: {
+                  categories: {
                       movie: [],
                       tvshow: [],
                       country: [],
@@ -32,29 +32,39 @@ function App() {
     }
   )
   const [ selectedMode, setMode ] = useState('easy');
-  const [ selectedCategory, setCategory ] = useState('');
+  const [ randomWord, setRandomWord ] = useState('');
+  const [ isCategoryClicked, setClickedCategory ] = useState(false);
+
+  const hangman: HangmanType = hangmanValues;
 
   useEffect(() => {
     setHangmanValues(hangmanData);
   },[])
 
-  const handleClick = (mode) => {
+  const handleModeClick = (mode) => {
     if(hangmanValues.modes[mode].isClicked != true){
         setHangmanValues(prev => ({
         ...prev,
         modes: Object.fromEntries(Object.entries(prev.modes).map(([key, mode]) => [key, {...mode, isClicked: !mode.isClicked}]))
       }))
     }
-    
-    console.log(hangmanValues)
   }
-  const hangman: HangmanType = hangmanValues;
 
+  const handleCategoryClick = (chosenCategory) => {
+    getRandomWord(chosenCategory)
+    setClickedCategory(prev => !prev)
+  }
+
+  const getRandomWord = (chosenCategory) => {
+    const randomIndex = Math.floor(Math.random() * hangmanValues.modes[selectedMode].categories[chosenCategory].length);
+    const getRandomWord = hangmanValues.modes[selectedMode].categories[chosenCategory][randomIndex];
+    setRandomWord(getRandomWord);  
+  }
   return (
     <>
       <div className='main'>
-        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} setCategory={setCategory} handleClick={handleClick}/>
-        <Alphabet hangman={hangman} selectedMode={selectedMode} selectedCategory={selectedCategory}/>
+        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
+        <Alphabet hangman={hangman} selectedMode={selectedMode} randomWord={randomWord}/>
       </div>
     </>
   )

@@ -14,17 +14,21 @@ export type MenuProps = {
     setCategory: string;
 }
 
-const StartMenu = ({hangman, selectedMode, setMode, setCategory, handleClick}: MenuProps) => {
+const StartMenu = ({hangman, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
     
+
     const displayModes = () => {
-       return Object.keys(hangman.modes).map(mode => (<Btn key={mode} varitaion={hangman.modes[mode].isClicked ? 'clicked' : ''} onClick={() => handleClick(mode)}>{mode}</Btn>));
+       return Object.keys(hangman.modes).map(mode => (<Btn key={mode} varitaion={hangman.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
+        handleModeClick(mode)
+        setMode(mode)
+       }}>{mode}</Btn>));
     }
 
     const displayCategories = () => {
-        return Object.keys(hangman.modes[selectedMode].category).map(key => (<Btn key={key} onClick={() => setCategory(key)}>{key}</Btn>));
+        return Object.keys(hangman.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => handleCategoryClick(category)}>{category}</Btn>));
     }
     
-   
+    
     
     return(
         <div className='overlay'>

@@ -3,7 +3,7 @@ const hangmanData = {
     modes: {
         easy: {
             isClicked: true,
-            category: {
+            categories: {
                 movie: ['joker', 'titanic', 'spiderman', 'avatar', 'batman'],
                 tvshow: ['supertalent', 'voice', 'friends', 'dexter'],
                 country: ['spain', 'france', 'sweden', 'norway', 'egypt'],
@@ -13,7 +13,7 @@ const hangmanData = {
         },
         hard: {
                 isClicked: false,
-                category: {
+                categories: {
                     movie: ['descent', 'interstellar', 'babadook', 'conjuring', 'saw'],
                     tvshow: ['fbi', 'bones', 'ncis', 'mentalist'],
                     country: ['tanzania', 'moldova', 'laos', 'haiti', 'senegal'],
