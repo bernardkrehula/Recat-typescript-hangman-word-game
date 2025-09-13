@@ -2,16 +2,14 @@ import './StartMenu.css'
 import Btn from '../Btn/Btn';
 import type { HangmanType } from '../../main/HangmanType';
 
-type HangmanMode = {
-    hangman: HangmanType;
-}
+type HangmanMode =  HangmanType;
 
 export type MenuProps = {
     hangman: HangmanMode;
     selectedMode: string;
-    setMode: string;
-    setCategory: string;
+    setMode: (value: string) => void;
     handleCategoryClick: (value: string) => void;
+    handleModeClick: (value: string) => void;
     isCategoryClicked: string;
 }
 
@@ -19,7 +17,7 @@ const StartMenu = ({hangman, selectedMode, setMode, handleModeClick, handleCateg
     
 
     const displayModes = () => {
-       return Object.keys(hangman.modes).map(mode => (<Btn key={mode} varitaion={hangman.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
+       return Object.keys(hangman.modes).map((mode, index) => (<Btn key={index} varitaion={hangman.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
         handleModeClick(mode)
         setMode(mode)
        }}>{mode}</Btn>));

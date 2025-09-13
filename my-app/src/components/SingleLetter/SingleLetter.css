@@ -1,0 +1,8 @@
+.single-letter{
+    display: inline-block;
+    transform: rotate(-98deg);
+    position: relative;
+    top: 18px;
+    color: rgb(255, 255, 255, 0.6);
+    transition: 0.35s all;
+}

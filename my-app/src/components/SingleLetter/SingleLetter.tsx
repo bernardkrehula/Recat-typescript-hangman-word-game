@@ -1,5 +1,6 @@
 import { useState } from "react";
 import Btn from "../Btn/Btn";
+import './SingleLetter.css'
 
 const SingleLetter = ({index, letter, guessTheWord}) => {
     const [ isClicked, setIsClicked ] = useState(false);
@@ -7,7 +8,7 @@ const SingleLetter = ({index, letter, guessTheWord}) => {
     return(
         <Btn key={index} varitaion={isClicked ? 'clicked-letter' : 'letter'} onClick={() => {
             setIsClicked(true)
-            guessTheWord(letter)}}>{letter}</Btn>
+            guessTheWord(letter)}}><span className={isClicked ? 'single-letter' : ''}>{letter}</span></Btn>
     )
 }
 

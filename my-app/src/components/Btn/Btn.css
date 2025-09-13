@@ -8,6 +8,10 @@
     border-radius: 15px;
     cursor: pointer;
     white-space: nowrap;
+    transition: 0.3s all;
+}
+.btn:hover{
+    background-color: #9acd32;
 }
 .change-category{
     padding: 15px 15px;
@@ -15,19 +19,29 @@
 }
 .letter{
     padding: 20px 30px;
-    background-color: #07ffc9;
+    background-color: #07ffc9 !important;
     font-size: 2.8rem;
+}
+.letter:hover{
+    background-color: #d9ffec !important;
 }
 .clicked-letter{ 
     padding: 20px 30px;
-    background-color: red;
+    background-color: #f10 !important;
     font-size: 2.8rem;
+    box-shadow: 0 0 10px #ff1101;
 }
 .clicked{
-    background-color: red;
+    background-color: #f10 !important;
+    cursor: default;
+    box-shadow: 0 0 10px #ff1101;
+    pointer-events: none;
 }
 .reset{
     background-color: #07ffc9;
     padding: 20px 10px;
     font-size: 3rem;
+}
+.reset:hover{
+    background-color: #d9ffec !important;
 }
