@@ -1,19 +1,37 @@
 import './Alphabet.css'
 import Btn from '../Btn/Btn'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import type { MenuProps } from '../startMenu/StartMenu'
+import SingleLetter from '../SingleLetter/SingleLetter'
 
 const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
     const [ wrongLetters, setWrongLetter ] = useState([]);
+    const [ chosenWord, setChosenWord ] = useState('');
 
-    const displayAlphabet = () => { 
+    useEffect(() => {
+      setChosenWord(Object.values(guessedWord))
+    }, [guessedWord])
+
+    const displayAlphabet = () => {
       return hangman.modes['easy'].alphabet
       .split('')
-      .map((letter, index) => (<Btn key={index} onClick={() => returnLetter(letter)} varitaion='letter'>{letter}</Btn>))
+      .map((letter, index) => (<SingleLetter key={index} index={index} letter={letter} guessTheWord={guessTheWord}/>))
     };
-    const returnLetter = (letter) => {
+    const guessTheWord = (letter) => {
       const clickedLetter = guessedWord.includes(letter);
       if(!clickedLetter) setWrongLetter(prev => [...prev, letter]);
+      if(clickedLetter) displayHidenGuessedWord(letter);
+    }
+    const displayHidenGuessedWord = (guessedLetter) => {
+      console.log(chosenWord)
+      if(guessedLetter){
+          /* setChosenWord(prev => prev.map((letter, index) =>
+            guessedWord[index] === guessedLetter ? guessedLetter : '-'
+          ))
+          setChosenWord(Object.values(guessedWord).map(letter => ))
+      
+        return <h5 className='guessed-word'>{chosenWord.join(' ') }</h5>; */
+      }
     }
 
     return(
@@ -25,6 +43,7 @@ const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
           </div>
         <img src='./0wrongGuess.jpeg' className='hangman'/>
         <h4>Guess the TVSHOW:</h4>
+        {displayHidenGuessedWord()}
         <div className='words'>
         {displayAlphabet()}
           

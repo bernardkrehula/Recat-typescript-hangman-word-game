@@ -51,11 +51,11 @@ function App() {
   }
 
   const handleCategoryClick = (chosenCategory) => {
-    getRandomWord(chosenCategory)
+    getGuessedWord(chosenCategory)
     setClickedCategory(prev => !prev)
   }
 
-  const getRandomWord = (chosenCategory) => {
+  const getGuessedWord = (chosenCategory) => {
     const randomIndex = Math.floor(Math.random() * hangmanValues.modes[selectedMode].categories[chosenCategory].length);
     const randomWord = hangmanValues.modes[selectedMode].categories[chosenCategory][randomIndex];
     setGuessedWord(randomWord);  
