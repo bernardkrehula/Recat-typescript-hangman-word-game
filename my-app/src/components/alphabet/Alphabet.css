@@ -16,6 +16,7 @@
     margin-top: 25px;
     gap: 10px;
     justify-content: center;
+    text-align: center;
 }
 .header{
     display: flex;

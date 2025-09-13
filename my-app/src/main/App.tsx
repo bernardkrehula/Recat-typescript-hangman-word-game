@@ -28,12 +28,14 @@ function App() {
                   },
                   alphabet: ''
           }
-      }
+      },
+      wrongGuessImages: []
     }
   )
   const [ selectedMode, setMode ] = useState('easy');
   const [ guessedWord, setGuessedWord ] = useState('');
   const [ isCategoryClicked, setClickedCategory ] = useState(false);
+  const [ selectedCategory, setSelectedCategory ] = useState('');
 
   const hangman: HangmanType = hangmanValues;
 
@@ -53,6 +55,7 @@ function App() {
   const handleCategoryClick = (chosenCategory) => {
     getGuessedWord(chosenCategory)
     setClickedCategory(prev => !prev)
+    setSelectedCategory(chosenCategory)
   }
 
   const getGuessedWord = (chosenCategory) => {
@@ -64,7 +67,7 @@ function App() {
     <>
       <div className='main'>
         <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
-        <Alphabet hangman={hangman} selectedMode={selectedMode} guessedWord={guessedWord}/>
+        <Alphabet hangman={hangman} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory}/>
       </div>
     </>
   )

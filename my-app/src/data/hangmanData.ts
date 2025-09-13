@@ -21,6 +21,7 @@ const hangmanData = {
                 },
                 alphabet: 'abcdefghijklmnopqrstuvwxyz'
         }
-    }
+    },
+    wrongGuessImages: [ '0wrongGuess.jpeg', '1wrongGuess.jpeg', '2wrongGuess.jpeg', '3wrongGuess.jpeg', '4wrongGuess.jpeg', '5wrongGuess.jpeg', '6wrongGuess.jpeg' ]
 }
 export default hangmanData;
