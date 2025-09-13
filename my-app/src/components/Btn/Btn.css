@@ -26,3 +26,8 @@
 .clicked{
     background-color: red;
 }
+.reset{
+    background-color: #07ffc9;
+    padding: 20px 10px;
+    font-size: 3rem;
+}

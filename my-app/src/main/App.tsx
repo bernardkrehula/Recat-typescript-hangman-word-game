@@ -67,7 +67,7 @@ function App() {
     <>
       <div className='main'>
         <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
-        <Alphabet hangman={hangman} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory}/>
+        <Alphabet hangman={hangman} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory}/>
       </div>
     </>
   )

@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react'
 import type { MenuProps } from '../startMenu/StartMenu'
 import SingleLetter from '../SingleLetter/SingleLetter'
 
-const Alphabet = ({hangman, selectedMode, guessedWord, selectedCategory}: MenuProps) => {
+const Alphabet = ({hangman, setClickedCategory, guessedWord, selectedCategory}: MenuProps) => {
     const [ wrongLetters, setWrongLetter ] = useState([]);
     const [ chosenWord, setChosenWord ] = useState('');
     const [ hiddenWord, setHiddenWord ] = useState([]);
@@ -31,6 +31,7 @@ const Alphabet = ({hangman, selectedMode, guessedWord, selectedCategory}: MenuPr
       if(clickedLetter) displayHidenGuessedWord(letter);
       if(wrongLetters.length === hangamanImagesLength){
         setShowAlphabet(prev => !prev)
+        setHiddenWord(Object.values(guessedWord))
       }
     }
     const displayHidenGuessedWord = (guessedLetter) => {      
@@ -46,20 +47,38 @@ const Alphabet = ({hangman, selectedMode, guessedWord, selectedCategory}: MenuPr
           })
       }
     }
+    const resetGame = () => {
+      setWinnerAnnoucment(false)
+      setShowAlphabet(false)
+      setWrongLetter([]);
+      setHiddenWord([])
+      setClickedCategory(false)
+    }
+    const changeCategory = () => {
+      setClickedCategory(false)
+      setShowAlphabet(false)
+      setWinnerAnnoucment(false)
+      setWrongLetter([]);
+      setHiddenWord([]);
+    }
 
     return(
       <>
         <div className='header'>
             <h2>Hangman. Do (or) Die</h2>
             <h3>Guessed wrong: {wrongLetters.length}</h3>
-            <Btn varitaion='change-category'>Change Category</Btn>
+            <Btn varitaion='change-category' onClick={changeCategory}>Change Category</Btn>
           </div>
         <img src={`./${hangman.wrongGuessImages[wrongLetters.length]}`} className='hangman'/>
         <h4>Guess the {selectedCategory.toUpperCase()}:</h4>
         <div className='guessed-words'>
           {hiddenWord.map((letter, index) => <h5 key={index} className='guessed-word'>{letter}</h5>)}
         </div>
-        {!showAlphabet ? displayAlphabet() : winnerAnnoucment ? <h4>You Won...</h4> : <h4>You lost...</h4>}
+        {!showAlphabet ? displayAlphabet() : 
+        <div className='winner-annoucment'>
+          {winnerAnnoucment ? <h4>You Won...</h4> : <h4>You lost...</h4>} 
+          <Btn varitaion='reset' onClick={resetGame}>Reset</Btn>
+        </div>}
       </>
     )
 }
