@@ -8,6 +8,7 @@ const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
     const [ wrongLetters, setWrongLetter ] = useState([]);
     const [ chosenWord, setChosenWord ] = useState('');
     const [ hiddenWord, setHiddenWord ] = useState([]);
+    const [ winnerAnnoucment, setWinnerAnnoucment ] = useState('');
 
     useEffect(() => {
       const hiddenValue = Object.values(guessedWord).map(() => '_')
@@ -27,7 +28,14 @@ const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
     }
     const displayHidenGuessedWord = (guessedLetter) => {
       if(guessedLetter){
-          setHiddenWord(prev => prev.map((hiddenLetter, index) => chosenWord[index] === guessedLetter ? guessedLetter : hiddenLetter))
+          setHiddenWord(prev => {
+            const updated = prev.map((hiddenLetter, index) => chosenWord[index] === guessedLetter ? guessedLetter : hiddenLetter)
+            
+            if(updated.every(hiddenLetter => hiddenLetter !== '_')){
+              console.log('winner')
+            }
+            return updated;
+          })
       }
     }
 
@@ -41,7 +49,7 @@ const Alphabet = ({hangman, selectedMode, guessedWord}: MenuProps) => {
         <img src='./0wrongGuess.jpeg' className='hangman'/>
         <h4>Guess the TVSHOW:</h4>
         <div className='guessed-words'>
-          {hiddenWord.map(letter => <h5 className='guessed-word'>{letter}</h5>)}
+          {hiddenWord.map((letter, index) => <h5 key={index} className='guessed-word'>{letter}</h5>)}
         </div>
         <div className='words'>
         {displayAlphabet()}
