@@ -35,7 +35,8 @@
     color: blue;
     white-space: nowrap;
 }
-.guessed-word{
+.guessed-words{
+    display: flex;
     color: white;
     font-size: 5rem;
     letter-spacing: 35px;
