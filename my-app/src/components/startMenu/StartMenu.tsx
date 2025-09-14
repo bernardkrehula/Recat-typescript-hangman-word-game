@@ -1,11 +1,11 @@
 import './StartMenu.css'
 import Btn from '../Btn/Btn';
-import type { HangmanType } from '../../main/HangmanType';
+import type { Category, HangmanType } from '../../main/HangmanType';
 
 type HangmanMode =  HangmanType;
 
 export type MenuProps = {
-    hangman: HangmanMode;
+    hangmanValues: HangmanMode;
     selectedMode: string;
     setMode: (value: string) => void;
     handleCategoryClick: (value: string) => void;
@@ -13,18 +13,18 @@ export type MenuProps = {
     isCategoryClicked: string;
 }
 
-const StartMenu = ({hangman, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
-    
+const StartMenu = ({hangmanValues, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
 
     const displayModes = () => {
-       return Object.keys(hangman.modes).map((mode, index) => (<Btn key={index} varitaion={hangman.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
+
+       return Object.keys(hangmanValues.modes).map((mode, index) => (<Btn key={index} varitaion={hangmanValues.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
         handleModeClick(mode)
         setMode(mode)
        }}>{mode}</Btn>));
     }
 
     const displayCategories = () => {
-        return Object.keys(hangman.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>));
+        return Object.keys(hangmanValues.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>));
     }
     
     

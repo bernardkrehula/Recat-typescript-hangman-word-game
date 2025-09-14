@@ -6,7 +6,7 @@ import StartMenu from '../components/startMenu/StartMenu';
 import type { HangmanType } from './HangmanType';
 
 function App() {
-  const [ hangmanValues, setHangmanValues ] = useState({
+  const [ hangmanValues, setHangmanValues ] = useState<HangmanType>({
       modes: {
           easy: {
               isClicked: true,
@@ -32,33 +32,44 @@ function App() {
       wrongGuessImages: []
     }
   )
-  const [ selectedMode, setMode ] = useState('easy');
+  const [ selectedMode, setMode ] = useState<Mode>('easy');
   const [ guessedWord, setGuessedWord ] = useState('');
   const [ isCategoryClicked, setClickedCategory ] = useState(false);
   const [ selectedCategory, setSelectedCategory ] = useState('');
 
-  const hangman: HangmanType = hangmanValues;
+  type Mode = 'easy' | 'hard'
+
+  type category = 'movie' | 'tvshow' | 'country' | 'animal';
 
   useEffect(() => {
     setHangmanValues(hangmanData);
   },[])
 
-  const handleModeClick = (mode) => {
+  const handleModeClick = (mode: 'easy' | 'hard') => {
     if(hangmanValues.modes[mode].isClicked != true){
         setHangmanValues(prev => ({
-        ...prev,
-        modes: Object.fromEntries(Object.entries(prev.modes).map(([key, mode]) => [key, {...mode, isClicked: !mode.isClicked}]))
-      }))
+          ...prev,
+          modes: {
+            easy: {
+              ...prev.modes.easy,
+              isClicked: mode === 'easy',
+            },
+            hard: {
+              ...prev.modes.hard,
+              isClicked: mode === 'hard',
+            },
+          },
+      }));
     }
   }
 
-  const handleCategoryClick = (chosenCategory) => {
+  const handleCategoryClick = (chosenCategory: category) => {
     getGuessedWord(chosenCategory)
     setClickedCategory(prev => !prev)
     setSelectedCategory(chosenCategory)
   }
 
-  const getGuessedWord = (chosenCategory) => {
+  const getGuessedWord = (chosenCategory: category) => {
     const randomIndex = Math.floor(Math.random() * hangmanValues.modes[selectedMode].categories[chosenCategory].length);
     const randomWord = hangmanValues.modes[selectedMode].categories[chosenCategory][randomIndex];
     setGuessedWord(randomWord);  
@@ -66,8 +77,8 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu hangman={hangman} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
-        <Alphabet hangman={hangman} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory}/>
+        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
+        <Alphabet hangmanValues={hangmanValues} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory}/>
       </div>
     </>
   )

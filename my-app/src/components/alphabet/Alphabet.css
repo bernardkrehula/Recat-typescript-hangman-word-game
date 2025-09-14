@@ -36,13 +36,23 @@
     color: blue;
     white-space: nowrap;
 }
-.guessed-words{
+.guessed-letters{
     display: flex;
     color: white;
     font-size: 5rem;
     letter-spacing: 35px;
     text-transform: uppercase;
     margin-top: 20px;
+}
+.guessed-letter{
+    display: inline-block;
+    transform: translateY(-50%);
+    animation: guessed-letter 0.5s forwards;
+}
+@keyframes guessed-letter{
+    to{
+        transform: translateX(0);
+    }
 }
 .winner-annoucment h4{
     margin-bottom: 15px;

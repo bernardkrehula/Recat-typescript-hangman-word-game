@@ -1,7 +1,11 @@
+export type Mode = 'easy' | 'hard';
+export type Category = 'movie' | 'tvshow' | 'country' | 'animal';
+
 export type HangmanType = {
-  modes: {
+  modes: Record<Mode, {
     easy: {
-        category: {
+        isClicked: boolean,
+        categories: {
           movie: string[],
           tvshow: string[],
           country: string[],
@@ -10,7 +14,8 @@ export type HangmanType = {
         alphabet: string
       },
       hard: {
-        category: {
+        isClicked: boolean,
+        categories: {
           movie: string[],
           tvshow: string[],
           country: string[],
@@ -18,6 +23,6 @@ export type HangmanType = {
         },
         alphabet: string
       }
-    },
-  wrongGuessImages: string[]
+    }>,
+    wrongGuessImages: string[]
 }

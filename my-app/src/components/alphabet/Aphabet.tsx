@@ -1,31 +1,39 @@
+import type { Dispatch, SetStateAction } from 'react'
 import './Alphabet.css'
 import Btn from '../Btn/Btn'
 import { useEffect, useState } from 'react'
-import type { MenuProps } from '../startMenu/StartMenu'
 import SingleLetter from '../SingleLetter/SingleLetter'
+import type { HangmanType } from '../../main/HangmanType'
 
-const Alphabet = ({hangman, setClickedCategory, guessedWord, selectedCategory}: MenuProps) => {
-    const [ wrongLetters, setWrongLetter ] = useState([]);
-    const [ chosenWord, setChosenWord ] = useState('');
-    const [ hiddenWord, setHiddenWord ] = useState([]);
+type alphabetType = {
+    hangmanValues: HangmanType;
+    setClickedCategory: Dispatch<SetStateAction<boolean>>;
+    guessedWord: string;
+    selectedCategory: string;
+}
+
+const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCategory}: alphabetType) => {
+    const [ wrongLetters, setWrongLetter ] = useState<string[]>([]);
+    const [ chosenWord, setChosenWord ] = useState<string[]>([]);
+    const [ hiddenWord, setHiddenWord ] = useState<string[]>([]);
     const [ showAlphabet, setShowAlphabet ] = useState(false);
     const [ winnerAnnoucment, setWinnerAnnoucment ] = useState(false);
-    const hangamanImagesLength = hangman.wrongGuessImages.length - 2;
+    const hangamanImagesLength = hangmanValues.wrongGuessImages.length - 2;
 
     useEffect(() => {
       const hiddenValue = Object.values(guessedWord).map(() => '_')
       setHiddenWord(hiddenValue)
-      setChosenWord(Object.values(guessedWord))
+      setChosenWord(guessedWord.split(''))
     }, [guessedWord])
 
     const displayAlphabet = () => {
       return(
-        <div className='words'>{hangman.modes['easy'].alphabet
+        <div className='words'>{hangmanValues.modes.easy.alphabet
           .split('')
           .map((letter, index) => (<SingleLetter key={index} index={index} letter={letter} guessTheWord={guessTheWord}/>))}
         </div>)
     };
-    const guessTheWord = (letter) => {
+    const guessTheWord = (letter: string) => {
       const clickedLetter = guessedWord.includes(letter);
       if(!clickedLetter) setWrongLetter(prev => [...prev, letter]);
       if(clickedLetter) displayHidenGuessedWord(letter);
@@ -34,7 +42,7 @@ const Alphabet = ({hangman, setClickedCategory, guessedWord, selectedCategory}: 
         setHiddenWord(Object.values(guessedWord))
       }
     }
-    const displayHidenGuessedWord = (guessedLetter) => {      
+    const displayHidenGuessedWord = (guessedLetter: string) => {      
       if(guessedLetter){
           setHiddenWord(prev => {
             const updated = prev.map((hiddenLetter, index) => chosenWord[index] === guessedLetter ? guessedLetter : hiddenLetter)
@@ -67,12 +75,13 @@ const Alphabet = ({hangman, setClickedCategory, guessedWord, selectedCategory}: 
         <div className='header'>
             <h2>Hangman. Do (or) Die</h2>
             <h3>Guessed wrong: {wrongLetters.length}</h3>
+            <h4 className='timmer'></h4>
             <Btn varitaion='change-category' onClick={changeCategory}>Change Category</Btn>
           </div>
-        <img src={`./${hangman.wrongGuessImages[wrongLetters.length]}`} className='hangman'/>
+        <img src={`./${hangmanValues.wrongGuessImages[wrongLetters.length]}`} className='hangman'/>
         <h4>Guess the {selectedCategory.toUpperCase()}:</h4>
-        <div className='guessed-words'>
-          {hiddenWord.map((letter, index) => <h5 key={index} className='guessed-word'>{letter}</h5>)}
+        <div className='guessed-letters'>
+          {hiddenWord.map((letter, index) => <h5 key={index} className='guessed-letter'>{letter}</h5>)}
         </div>
         {!showAlphabet ? displayAlphabet() : 
         <div className='winner-annoucment'>
