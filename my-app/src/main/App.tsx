@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import './App.css'
 import hangmanData from '../data/hangmanData';
 import Alphabet from '../components/alphabet/Aphabet';
@@ -6,32 +6,10 @@ import StartMenu from '../components/startMenu/StartMenu';
 import type { HangmanType } from './HangmanType';
 
 function App() {
-  const [ hangmanValues, setHangmanValues ] = useState<HangmanType>({
-      modes: {
-          easy: {
-              isClicked: true,
-              categories: {
-                  movie: [],
-                  tvshow: [],
-                  country: [],
-                  animal: []
-              },
-              alphabet: ''
-          },
-          hard: {
-                  isClicked: false,
-                  categories: {
-                      movie: [],
-                      tvshow: [],
-                      country: [],
-                      animal: []
-                  },
-                  alphabet: ''
-          }
-      },
-      wrongGuessImages: []
-    }
-  )
+  //Pomaknuti sve sto se ne mjenja u constante
+  //
+  const hangmanValues: HangmanType = hangmanData;
+
   const [ selectedMode, setMode ] = useState<Mode>('easy');
   const [ guessedWord, setGuessedWord ] = useState('');
   const [ isCategoryClicked, setClickedCategory ] = useState(false);
@@ -40,10 +18,6 @@ function App() {
   type Mode = 'easy' | 'hard'
 
   type category = 'movie' | 'tvshow' | 'country' | 'animal';
-
-  useEffect(() => {
-    setHangmanValues(hangmanData);
-  },[])
 
   const handleModeClick = (mode: 'easy' | 'hard') => {
     if(hangmanValues.modes[mode].isClicked != true){

@@ -17,6 +17,7 @@
     gap: 10px;
     justify-content: center;
     text-align: center;
+    place-items: center;
 }
 .header{
     display: flex;

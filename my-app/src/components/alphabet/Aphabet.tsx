@@ -10,14 +10,16 @@ type alphabetType = {
     setClickedCategory: Dispatch<SetStateAction<boolean>>;
     guessedWord: string;
     selectedCategory: string;
+    selectedMode: string;
 }
 
-const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCategory}: alphabetType) => {
+const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCategory, selectedMode}: alphabetType) => {
     const [ wrongLetters, setWrongLetter ] = useState<string[]>([]);
     const [ chosenWord, setChosenWord ] = useState<string[]>([]);
     const [ hiddenWord, setHiddenWord ] = useState<string[]>([]);
     const [ showAlphabet, setShowAlphabet ] = useState(false);
     const [ winnerAnnoucment, setWinnerAnnoucment ] = useState(false);
+    const [ timeLeft, setTimeLeft ] = useState(30);
     const hangamanImagesLength = hangmanValues.wrongGuessImages.length - 2;
 
     useEffect(() => {
@@ -55,6 +57,7 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
           })
       }
     }
+   
     const resetGame = () => {
       setWinnerAnnoucment(false)
       setShowAlphabet(false)
@@ -75,7 +78,6 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
         <div className='header'>
             <h2>Hangman. Do (or) Die</h2>
             <h3>Guessed wrong: {wrongLetters.length}</h3>
-            <h4 className='timmer'></h4>
             <Btn varitaion='change-category' onClick={changeCategory}>Change Category</Btn>
           </div>
         <img src={`./${hangmanValues.wrongGuessImages[wrongLetters.length]}`} className='hangman'/>

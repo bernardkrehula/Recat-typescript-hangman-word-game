@@ -16,7 +16,6 @@ export type MenuProps = {
 const StartMenu = ({hangmanValues, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
 
     const displayModes = () => {
-
        return Object.keys(hangmanValues.modes).map((mode, index) => (<Btn key={index} varitaion={hangmanValues.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
         handleModeClick(mode)
         setMode(mode)
@@ -26,8 +25,6 @@ const StartMenu = ({hangmanValues, selectedMode, setMode, handleModeClick, handl
     const displayCategories = () => {
         return Object.keys(hangmanValues.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>));
     }
-    
-    
     
     return(
         !isCategoryClicked ? (<div className='overlay'>
