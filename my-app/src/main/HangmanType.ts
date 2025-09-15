@@ -10,8 +10,7 @@ export type HangmanType = {
           tvshow: string[],
           country: string[],
           animal: string[]
-        },
-        alphabet: string
+        }
       },
       hard: {
         isClicked: boolean,
@@ -20,9 +19,9 @@ export type HangmanType = {
           tvshow: string[],
           country: string[],
           animal: string[]
-        },
-        alphabet: string
+        }
       }
     },
-    wrongGuessImages: string[]
+    wrongGuessImages: string[],
+    alphabet: string
 }

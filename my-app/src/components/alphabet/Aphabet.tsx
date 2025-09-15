@@ -30,7 +30,7 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
 
     const displayAlphabet = () => {
       return(
-        <div className='words'>{hangmanValues.modes.easy.alphabet
+        <div className='words'>{hangmanValues.alphabet
           .split('')
           .map((letter, index) => (<SingleLetter key={index} index={index} letter={letter} guessTheWord={guessTheWord}/>))}
         </div>)

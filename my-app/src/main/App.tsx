@@ -9,7 +9,6 @@ function App() {
   //Pomaknuti sve sto se ne mjenja u constante
   //
   const hangmanValues: HangmanType = hangmanData;
-
   const [ selectedMode, setMode ] = useState<Mode>('easy');
   const [ guessedWord, setGuessedWord ] = useState('');
   const [ isCategoryClicked, setClickedCategory ] = useState(false);
@@ -19,23 +18,7 @@ function App() {
 
   type category = 'movie' | 'tvshow' | 'country' | 'animal';
 
-  const handleModeClick = (mode: 'easy' | 'hard') => {
-    if(hangmanValues.modes[mode].isClicked != true){
-        setHangmanValues(prev => ({
-          ...prev,
-          modes: {
-            easy: {
-              ...prev.modes.easy,
-              isClicked: mode === 'easy',
-            },
-            hard: {
-              ...prev.modes.hard,
-              isClicked: mode === 'hard',
-            },
-          },
-      }));
-    }
-  }
+  
 
   const handleCategoryClick = (chosenCategory: category) => {
     getGuessedWord(chosenCategory)
@@ -51,7 +34,7 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} setMode={setMode} handleModeClick={handleModeClick} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
+        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} setMode={setMode} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
         <Alphabet hangmanValues={hangmanValues} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory}/>
       </div>
     </>

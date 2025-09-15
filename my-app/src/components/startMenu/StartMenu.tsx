@@ -1,6 +1,8 @@
 import './StartMenu.css'
 import Btn from '../Btn/Btn';
 import type { Category, HangmanType } from '../../main/HangmanType';
+import SingleMode from './SingleMode/SingleMode';
+import { useState } from 'react';
 
 type HangmanMode =  HangmanType;
 
@@ -14,13 +16,9 @@ export type MenuProps = {
 }
 
 const StartMenu = ({hangmanValues, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
-
-    const displayModes = () => {
-       return Object.keys(hangmanValues.modes).map((mode, index) => (<Btn key={index} varitaion={hangmanValues.modes[mode].isClicked ? 'clicked' : ''} onClick={() => {
-        handleModeClick(mode)
-        setMode(mode)
-       }}>{mode}</Btn>));
-    }
+    const [ isModeSelected, setSelectedMode ] = useState(hangmanValues.modes)
+    
+    const displayMode = () => Object.entries(isModeSelected).map(selected => <SingleMode hangmanValues={hangmanValues} setMode={setMode} selectedMode={selectedMode} selected={selected} setSelectedMode={setSelectedMode}/>)
 
     const displayCategories = () => {
         return Object.keys(hangmanValues.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>));
@@ -31,8 +29,8 @@ const StartMenu = ({hangmanValues, selectedMode, setMode, handleModeClick, handl
             <div className="start-menu">
                 <h2>Chose mode:</h2>
                 <div className='easy-hard-btns'>
-                    {displayModes()}
-                </div>
+                    {displayMode()}
+                </div> 
                 <h2>Chose Category to start the game:</h2>
                 <div className='categories'>
                     {displayCategories()}
