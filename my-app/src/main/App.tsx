@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import './App.css'
 import hangmanData from '../data/hangmanData';
 import Alphabet from '../components/alphabet/Aphabet';
@@ -12,15 +12,35 @@ function App() {
   const [ guessedWord, setGuessedWord ] = useState('');
   const [ isCategoryClicked, setClickedCategory ] = useState(false);
   const [ selectedCategory, setSelectedCategory ] = useState('');
-
+  const [ timeLeft, setTimeLeft ] = useState(0);
+  const [ showAlphabet, setShowAlphabet ] = useState(true);
+  const [ hiddenWord, setHiddenWord ] = useState<string[]>([]);
+  
   type Mode = 'easy' | 'hard'
 
   type category = 'movie' | 'tvshow' | 'country' | 'animal';
-
+  
   const handleCategoryClick = (chosenCategory: category) => {
     getGuessedWord(chosenCategory)
     setClickedCategory(prev => !prev)
     setSelectedCategory(chosenCategory)
+    setTimeLeft(30);
+  }
+  useEffect(() => {
+    if(selectedMode === 'hard' && isCategoryClicked) handleTimmer()
+  }, [selectedMode, isCategoryClicked, timeLeft])
+
+  const handleModClick = (mode) => {
+    setMode(mode);
+  }
+  const handleTimmer = () => {
+    setTimeout(() => {
+      setTimeLeft(prev => prev > 0 ? prev - 1 : prev)
+    },1000)
+    if(timeLeft === 0) {
+      setShowAlphabet(false)
+      setHiddenWord(Object.values(guessedWord))
+    };
   }
 
   const getGuessedWord = (chosenCategory: category) => {
@@ -31,8 +51,8 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} setMode={setMode} isCategoryClicked={isCategoryClicked} handleCategoryClick={handleCategoryClick}/>
-        <Alphabet hangmanValues={hangmanValues} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory}/>
+        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} isCategoryClicked={isCategoryClicked} handleCategoryClick={handleCategoryClick} handleModClick={handleModClick} timeLeft={timeLeft}/>
+        <Alphabet hangmanValues={hangmanValues} timeLeft={timeLeft} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory} showAlphabet={showAlphabet} setShowAlphabet={setShowAlphabet} hiddenWord={hiddenWord} setHiddenWord={setHiddenWord}/>
       </div>
     </>
   )

@@ -17,10 +17,10 @@ export type SingleModProps = MenuProps & {
     mode: string;
 }
 
-const StartMenu = ({hangmanValues, selectedMode, setMode, handleCategoryClick, isCategoryClicked}: MenuProps) => {
+const StartMenu = ({hangmanValues, selectedMode, handleCategoryClick, isCategoryClicked, handleModClick}: MenuProps) => {
     
     
-    const displayMode = () => Object.keys(hangmanValues.modes).map((mode, key) => <SingleMode key={key} setMode={setMode} selectedMode={selectedMode} mode={mode}/>)
+    const displayMode = () => Object.keys(hangmanValues.modes).map((mode, key) => <SingleMode key={key} selectedMode={selectedMode} mode={mode} handleModClick={handleModClick}/>)
 
     const displayCategories = () => {
         return Object.keys(hangmanValues.modes[selectedMode].categories).map((category, index) => (<SingleCategory key={index} index={index} category={category} handleCategoryClick={handleCategoryClick}/>));

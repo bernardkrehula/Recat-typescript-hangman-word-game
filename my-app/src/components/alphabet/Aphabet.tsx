@@ -13,24 +13,17 @@ type alphabetType = {
     selectedMode: string;
 }
 
-const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCategory, selectedMode}: alphabetType) => {
+const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setHiddenWord, guessedWord, selectedCategory, selectedMode, showAlphabet, setShowAlphabet}: alphabetType) => {
     const [ wrongLetters, setWrongLetter ] = useState<string[]>([]);
     const [ chosenWord, setChosenWord ] = useState<string[]>([]);
-    const [ hiddenWord, setHiddenWord ] = useState<string[]>([]);
-    const [ showAlphabet, setShowAlphabet ] = useState(true);
     const [ winnerAnnoucment, setWinnerAnnoucment ] = useState(false);
-    const [ timeLeft, setTimeLeft ] = useState(30);
     const hangamanImagesLength = hangmanValues.wrongGuessImages.length - 2;
 
     useEffect(() => {
       const hiddenValue = Object.values(guessedWord).map(() => '_')
       setHiddenWord(hiddenValue)
       setChosenWord(guessedWord.split(''))
-      if(selectedMode === 'hard'){
-        setTimer()
-        console.log(timeLeft)
-      }
-    }, [guessedWord, timeLeft])
+    }, [guessedWord])
 
     const displayAlphabet = () => {
       return(
@@ -61,18 +54,7 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
           })
       }
     }
-    const setTimer = () => {
-      setTimeout(() => {
-        if(timeLeft > 0){
-          setTimeLeft(prev => prev - 1)
-        }
-        if(timeLeft === 0) {
-          setWinnerAnnoucment(false)
-          setShowAlphabet(false)
-          setHiddenWord(Object.values(guessedWord))
-        }
-      }, 1000)
-    }
+    
     const resetGame = () => {
       setWinnerAnnoucment(false)
       setShowAlphabet(true)
@@ -87,6 +69,9 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
       setWrongLetter([]);
       setHiddenWord([]);
     }
+    const formatTime = (num) => {
+      return String(num).padStart(2, '0')
+    }
 
     return(
       <>
@@ -95,6 +80,7 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
             <h3>Guessed wrong: {wrongLetters.length}</h3>
             <Btn varitaion='change-category' onClick={changeCategory}>Change Category</Btn>
           </div>
+          {selectedMode === 'hard' && showAlphabet ? <h4 className='timmer'>Time left: 00:{formatTime(timeLeft)}</h4> : ''}
         <img src={`./${hangmanValues.wrongGuessImages[wrongLetters.length]}`} className='hangman'/>
         <h4>Guess the {selectedCategory.toUpperCase()}:</h4>
         <div className='guessed-letters'>

@@ -1,10 +1,10 @@
 import Btn from "../../Btn/Btn";
 import type { SingleModProps } from "../StartMenu";
 
-const SingleMode = ({setMode, selectedMode, mode}: SingleModProps) => {
+const SingleMode = ({selectedMode, mode, handleModClick}: SingleModProps) => {
     
     return(<Btn  varitaion={mode === selectedMode ? 'clicked' : ''} onClick={() => {
-            setMode(mode)
+            handleModClick(mode)
         }}>{mode}</Btn>);
 }
 

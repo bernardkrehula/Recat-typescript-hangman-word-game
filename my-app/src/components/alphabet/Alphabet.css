@@ -36,6 +36,9 @@
     color: blue;
     white-space: nowrap;
 }
+.timmer{
+    color: red !important;
+}
 .guessed-letters{
     display: flex;
     color: white;
