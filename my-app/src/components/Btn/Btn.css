@@ -21,6 +21,8 @@
     padding: 20px 30px;
     background-color: #07ffc9 !important;
     font-size: 2.8rem;
+    margin: 5px;
+    width: 80px;
 }
 .letter:hover{
     background-color: #d9ffec !important;
@@ -30,6 +32,8 @@
     background-color: #f10 !important;
     font-size: 2.8rem;
     box-shadow: 0 0 10px #ff1101;
+    margin: 5px;
+    width: 80px;
 }
 .clicked{
     background-color: #f10 !important;
