@@ -1,4 +1,5 @@
 import Btn from "../../Btn/Btn";
+import type { SingleModProps } from "../StartMenu";
 
 const SingleMode = ({setMode, selectedMode, mode}: SingleModProps) => {
     

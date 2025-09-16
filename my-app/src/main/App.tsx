@@ -7,7 +7,6 @@ import type { HangmanType } from './HangmanType';
 
 function App() {
   //Pomaknuti sve sto se ne mjenja u constante
-  //
   const hangmanValues: HangmanType = hangmanData;
   const [ selectedMode, setMode ] = useState<Mode>('easy');
   const [ guessedWord, setGuessedWord ] = useState('');
@@ -32,7 +31,7 @@ function App() {
   return (
     <>
       <div className='main'>
-        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} setMode={setMode} handleCategoryClick={handleCategoryClick} isCategoryClicked={isCategoryClicked}/>
+        <StartMenu hangmanValues={hangmanValues} selectedMode={selectedMode} setMode={setMode} isCategoryClicked={isCategoryClicked} handleCategoryClick={handleCategoryClick}/>
         <Alphabet hangmanValues={hangmanValues} selectedMode={selectedMode} guessedWord={guessedWord} selectedCategory={selectedCategory} setClickedCategory={setClickedCategory}/>
       </div>
     </>
