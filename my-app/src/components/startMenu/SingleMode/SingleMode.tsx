@@ -1,13 +1,10 @@
-import type { MenuProps } from "../StartMenu";
 import Btn from "../../Btn/Btn";
-import { useState } from "react";
 
-const SingleMode = ({hangmanValues, setMode, selectedMode, selected, setSelectedMode}: MenuProps) => {
-    console.log(selected)
-    return(<Btn  varitaion={selected ? 'clicked' : ''} onClick={() => {
+const SingleMode = ({setMode, selectedMode, mode}: SingleModProps) => {
+    
+    return(<Btn  varitaion={mode === selectedMode ? 'clicked' : ''} onClick={() => {
             setMode(mode)
-            setSelectedMode(prev => prev.map(isClicked => !isClicked))
-        }}>{selectedMode}</Btn>);
+        }}>{mode}</Btn>);
 }
 
 export default SingleMode;

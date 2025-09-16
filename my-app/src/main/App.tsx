@@ -18,8 +18,6 @@ function App() {
 
   type category = 'movie' | 'tvshow' | 'country' | 'animal';
 
-  
-
   const handleCategoryClick = (chosenCategory: category) => {
     getGuessedWord(chosenCategory)
     setClickedCategory(prev => !prev)

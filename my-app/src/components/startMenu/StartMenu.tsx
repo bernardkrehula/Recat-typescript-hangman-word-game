@@ -11,14 +11,16 @@ export type MenuProps = {
     selectedMode: string;
     setMode: (value: string) => void;
     handleCategoryClick: (value: string) => void;
-    handleModeClick: (value: string) => void;
     isCategoryClicked: string;
 }
+export type SingleModProps = MenuProps & {
+    mode: string;
+}
 
-const StartMenu = ({hangmanValues, selectedMode, setMode, handleModeClick, handleCategoryClick, isCategoryClicked}: MenuProps) => {
-    const [ isModeSelected, setSelectedMode ] = useState(hangmanValues.modes)
+const StartMenu = ({hangmanValues, selectedMode, setMode, handleCategoryClick, isCategoryClicked}: MenuProps) => {
     
-    const displayMode = () => Object.entries(isModeSelected).map(selected => <SingleMode hangmanValues={hangmanValues} setMode={setMode} selectedMode={selectedMode} selected={selected} setSelectedMode={setSelectedMode}/>)
+    
+    const displayMode = () => Object.keys(hangmanValues.modes).map((mode, key) => <SingleMode key={key} setMode={setMode} selectedMode={selectedMode} mode={mode}/>)
 
     const displayCategories = () => {
         return Object.keys(hangmanValues.modes[selectedMode].categories).map(category => (<Btn key={category} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>));
