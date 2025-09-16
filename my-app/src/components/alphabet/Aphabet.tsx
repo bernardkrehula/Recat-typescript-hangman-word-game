@@ -17,7 +17,7 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
     const [ wrongLetters, setWrongLetter ] = useState<string[]>([]);
     const [ chosenWord, setChosenWord ] = useState<string[]>([]);
     const [ hiddenWord, setHiddenWord ] = useState<string[]>([]);
-    const [ showAlphabet, setShowAlphabet ] = useState(false);
+    const [ showAlphabet, setShowAlphabet ] = useState(true);
     const [ winnerAnnoucment, setWinnerAnnoucment ] = useState(false);
     const [ timeLeft, setTimeLeft ] = useState(30);
     const hangamanImagesLength = hangmanValues.wrongGuessImages.length - 2;
@@ -26,7 +26,11 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
       const hiddenValue = Object.values(guessedWord).map(() => '_')
       setHiddenWord(hiddenValue)
       setChosenWord(guessedWord.split(''))
-    }, [guessedWord])
+      if(selectedMode === 'hard'){
+        setTimer()
+        console.log(timeLeft)
+      }
+    }, [guessedWord, timeLeft])
 
     const displayAlphabet = () => {
       return(
@@ -51,16 +55,27 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
             
             if(updated.every(hiddenLetter => hiddenLetter !== '_')){
               setWinnerAnnoucment(true)
-              setShowAlphabet(true)
+              setShowAlphabet(false)
             }  
             return updated;
           })
       }
     }
-   
+    const setTimer = () => {
+      setTimeout(() => {
+        if(timeLeft > 0){
+          setTimeLeft(prev => prev - 1)
+        }
+        if(timeLeft === 0) {
+          setWinnerAnnoucment(false)
+          setShowAlphabet(false)
+          setHiddenWord(Object.values(guessedWord))
+        }
+      }, 1000)
+    }
     const resetGame = () => {
       setWinnerAnnoucment(false)
-      setShowAlphabet(false)
+      setShowAlphabet(true)
       setWrongLetter([]);
       setHiddenWord([])
       setClickedCategory(false)
@@ -85,7 +100,7 @@ const Alphabet = ({hangmanValues, setClickedCategory, guessedWord, selectedCateg
         <div className='guessed-letters'>
           {hiddenWord.map((letter, index) => <h5 key={index} className='guessed-letter'>{letter}</h5>)}
         </div>
-        {!showAlphabet ? displayAlphabet() : 
+        {showAlphabet ? displayAlphabet() : 
         <div className='winner-annoucment'>
           {winnerAnnoucment ? <h4>You Won...</h4> : <h4>You lost...</h4>} 
           <Btn varitaion='reset' onClick={resetGame}>Reset</Btn>
