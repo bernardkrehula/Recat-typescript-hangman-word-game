@@ -1,9 +1,16 @@
+import type { Category } from "../../../main/HangmanType";
 import Btn from "../../Btn/Btn";
 
-const SingleCategory = ({index, category, handleCategoryClick}) => {
+type SingleCategoryTypes = {
+    index: number;
+    category: Category;
+    handleCategoryClick: (value: Category) => void;
+}
+
+const SingleCategory = ({index, category, handleCategoryClick}: SingleCategoryTypes) => {
 
     return(
-        <Btn key={index} onClick={() => {handleCategoryClick(category)}}>{category}</Btn>
+        <Btn key={index} variation='primary' onClick={() => {handleCategoryClick(category)}}>{category}</Btn>
     )
 }
 
