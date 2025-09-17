@@ -1,10 +1,15 @@
 import './Btn.css'
-import { useState } from 'react';
 
-const Btn = ({varitaion, onClick, children}) => {
+type BtnType = {
+    variation: string;
+    onClick: (event: React.MouseEvent<HTMLButtonElement>) => void;
+    children: React.ReactNode;
+}
+
+const Btn = ({variation, onClick, children}: BtnType) => {
 
     return(
-        <button className={`btn ${varitaion}`} onClick={onClick}>{children}</button>
+        <button className={`btn ${variation}`} onClick={onClick}>{children}</button>
     )
 }
 export default Btn;

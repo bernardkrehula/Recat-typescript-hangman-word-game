@@ -1,5 +1,5 @@
 import './StartMenu.css'
-import type { HangmanType } from '../../main/HangmanType';
+import type { Category, HangmanType, Mode } from '../../main/HangmanType';
 import SingleMode from './SingleMode/SingleMode';
 import SingleCategory from './SingleCategory/SingleCategory';
 
@@ -7,23 +7,32 @@ type HangmanMode =  HangmanType;
 
 export type MenuProps = {
     hangmanValues: HangmanMode;
-    selectedMode: string;
-    setMode: (value: string) => void;
-    handleCategoryClick: (value: string) => void;
-    isCategoryClicked: string;
-    setSelectedCategory: (value: string) => void;
+    selectedMode: Mode;
+    handleCategoryClick: (value: Category) => void;
+    isCategoryClicked: boolean;
+    handleModClick: (value: Mode) => void;
 }
-export type SingleModProps = MenuProps & {
-    mode: string;
+export type SingleModProps = {
+    mode: Mode;
+    handleModClick: (value: Mode) => void;
+    selectedMode: Mode;
 }
 
 const StartMenu = ({hangmanValues, selectedMode, handleCategoryClick, isCategoryClicked, handleModClick}: MenuProps) => {
     
     
-    const displayMode = () => Object.keys(hangmanValues.modes).map((mode, key) => <SingleMode key={key} selectedMode={selectedMode} mode={mode} handleModClick={handleModClick}/>)
+    const displayMode = () => { return Object.keys(hangmanValues.modes).map((modeKey, key) => {
+        const mode = modeKey as Mode;
+        return <SingleMode key={key} selectedMode={selectedMode} mode={mode} handleModClick={handleModClick}/>
+    })}
 
     const displayCategories = () => {
-        return Object.keys(hangmanValues.modes[selectedMode].categories).map((category, index) => (<SingleCategory key={index} index={index} category={category} handleCategoryClick={handleCategoryClick}/>));
+        return Object.keys(hangmanValues.modes[selectedMode].categories).map((categoryKey, index) => {
+            const category = categoryKey as Category;
+            return(
+                <SingleCategory key={index} index={index} category={category} handleCategoryClick={handleCategoryClick}/>
+            )
+    });
     }
     
     return(

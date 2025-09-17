@@ -11,6 +11,11 @@ type alphabetType = {
     guessedWord: string;
     selectedCategory: string;
     selectedMode: string;
+    timeLeft: number;
+    hiddenWord: string[];
+    setHiddenWord: Dispatch<SetStateAction<string[]>>;
+    showAlphabet: boolean;
+    setShowAlphabet: (value: boolean) => void;
 }
 
 const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setHiddenWord, guessedWord, selectedCategory, selectedMode, showAlphabet, setShowAlphabet}: alphabetType) => {
@@ -20,7 +25,8 @@ const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setH
     const hangamanImagesLength = hangmanValues.wrongGuessImages.length - 2;
 
     useEffect(() => {
-      const hiddenValue = Object.values(guessedWord).map(() => '_')
+      const hiddenValue: string[] = guessedWord.split('').map(() => '_')
+      console.log(hiddenValue)
       setHiddenWord(hiddenValue)
       setChosenWord(guessedWord.split(''))
     }, [guessedWord])
@@ -37,16 +43,18 @@ const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setH
       if(!clickedLetter) setWrongLetter(prev => [...prev, letter]);
       if(clickedLetter) displayHidenGuessedWord(letter);
       if(wrongLetters.length === hangamanImagesLength){
-        setShowAlphabet(prev => !prev)
+        setShowAlphabet(false)
         setHiddenWord(Object.values(guessedWord))
       }
     }
-    const displayHidenGuessedWord = (guessedLetter: string) => {      
+    const displayHidenGuessedWord = (guessedLetter: string) => {
+      if(!guessedLetter) return
+
       if(guessedLetter){
-          setHiddenWord(prev => {
-            const updated = prev.map((hiddenLetter, index) => chosenWord[index] === guessedLetter ? guessedLetter : hiddenLetter)
+          setHiddenWord((prev) => {
+            const updated = prev.map((hiddenLetter: string, index: number) => chosenWord[index] === guessedLetter ? guessedLetter : hiddenLetter)
             
-            if(updated.every(hiddenLetter => hiddenLetter !== '_')){
+            if(updated.every((hiddenLetter: string) => hiddenLetter !== '_')){
               setWinnerAnnoucment(true)
               setShowAlphabet(false)
             }  
@@ -64,12 +72,12 @@ const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setH
     }
     const changeCategory = () => {
       setClickedCategory(false)
-      setShowAlphabet(false)
+      setShowAlphabet(true)
       setWinnerAnnoucment(false)
       setWrongLetter([]);
       setHiddenWord([]);
     }
-    const formatTime = (num) => {
+    const formatTime = (num: number) => {
       return String(num).padStart(2, '0')
     }
 
@@ -78,7 +86,7 @@ const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setH
         <div className='header'>
             <h2>Hangman. Do (or) Die</h2>
             <h3>Guessed wrong: {wrongLetters.length}</h3>
-            <Btn varitaion='change-category' onClick={changeCategory}>Change Category</Btn>
+            <Btn variation='change-category' onClick={changeCategory}>Change Category</Btn>
           </div>
           {selectedMode === 'hard' && showAlphabet ? <h4 className='timmer'>Time left: 00:{formatTime(timeLeft)}</h4> : ''}
         <img src={`./${hangmanValues.wrongGuessImages[wrongLetters.length]}`} className='hangman'/>
@@ -89,7 +97,7 @@ const Alphabet = ({hangmanValues, timeLeft, setClickedCategory, hiddenWord, setH
         {showAlphabet ? displayAlphabet() : 
         <div className='winner-annoucment'>
           {winnerAnnoucment ? <h4>You Won...</h4> : <h4>You lost...</h4>} 
-          <Btn varitaion='reset' onClick={resetGame}>Reset</Btn>
+          <Btn variation='reset' onClick={resetGame}>Reset</Btn>
         </div>}
       </>
     )

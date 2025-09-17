@@ -34,6 +34,7 @@
     box-shadow: 0 0 10px #ff1101;
     margin: 5px;
     width: 80px;
+    pointer-events: none;
 }
 .clicked{
     background-color: #f10 !important;
